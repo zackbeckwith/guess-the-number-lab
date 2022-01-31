@@ -3,6 +3,7 @@ const game = {
   biggestNum: 100,
   smallestNum: 1,
   guess: null,
+  prevGuessesPre: [],
   prevGuesses: [],
   secretNum: null,
   getGuess: function () {
@@ -21,15 +22,17 @@ const game = {
     game.getGuess()
 
     console.log(this.secretNum)
-    do {
-      this.prevGuesses.push(this.guess) 
+    
+    while (this.guess !== this.secretNum) {
+      this.prevGuessesPre.push(this.guess)
+      this.prevGuesses = this.prevGuessesPre.join(', ') 
     
       alert(`Incorrect answer. Try again.
       Previous Attempts: ${this.prevGuesses}`)
 
       console.log(this.prevGuesses)
-      ame.getGuess()
-      } while (this.guess !== this.secretNum);
+      game.getGuess()
+    }
       alert('Correct!')
 
   }
