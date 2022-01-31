@@ -14,6 +14,7 @@ const game = {
     },
 
   play: function() {
+    this.setNum();
     this.secretNum = Math.floor(Math.random() * 
       (this.biggestNum - this.smallestNum + 1)) + this.smallestNum
 
@@ -21,6 +22,7 @@ const game = {
 
     while (this.guess !== this.secretNum) {
       this.prevGuesses.push(this.guess)
+      this.helper();
       this.render();
       game.getGuess();
     }
@@ -33,6 +35,17 @@ const game = {
       alert(`Incorrect answer. Try again. The answer is: ${this.secretNum}.
       Previous Attempts: ${this.prevGuesses.join(', ')} `)
     }
+  },
+  helper: function() {
+    if (this.guess > this.secretNum){
+      this.biggestNum = this.guess
+    }else if (this.guess < this.secretNum) {
+      this.smallestNum = this.guess
+    }
+  },
+  setNum: function() {
+    this.smallestNum = parseInt(prompt(`Enter the range on the low end.`)) - 1
+    this.biggestNum = parseInt(prompt(`Enter the range on the high end.`)) + 1
   }
 }
 
