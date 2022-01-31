@@ -6,7 +6,7 @@ const game = {
   prevGuesses: [],
   secretNum: null,
   getGuess: function () {
-    this.guess = parseInt(prompt(`Enter a guess between ${this.smallestNum + 1} and ${this.biggestNum - 1}.`));
+    this.guess = parseInt(prompt(`Enter a guess between ${this.smallestNum + 1} and ${this.biggestNum - 1}. The answer is: ${this.secretNum}`));
 
     while (isNaN(this.guess) || this.guess >= this.biggestNum || this.guess <= this.smallestNum){
       this.guess = parseInt(prompt(`Invalid answer. Enter a guess between ${this.smallestNum + 1} and ${this.biggestNum - 1}.`))
@@ -17,22 +17,22 @@ const game = {
     this.secretNum = Math.floor(Math.random() * 
       (this.biggestNum - this.smallestNum + 1)) + this.smallestNum
 
-    console.log(this.secretNum)
-    game.getGuess()
+    game.getGuess();
 
-    console.log(this.secretNum)
-    
     while (this.guess !== this.secretNum) {
       this.prevGuesses.push(this.guess)
-    
-      alert(`Incorrect answer. Try again.
-      Previous Attempts: ${this.prevGuesses.join(', ')}`)
-
-      console.log(this.prevGuesses)
-      game.getGuess()
+      this.render();
+      game.getGuess();
     }
-      alert('Correct!')
-
+    this.render();
+    return
+  },
+  render: function() {
+    if (this.guess === this.secretNum){ alert(`Congrats! You guessed the number in ${this.prevGuesses.length + 1} turn(s)!`)
+    }else{
+      alert(`Incorrect answer. Try again. The answer is: ${this.secretNum}.
+      Previous Attempts: ${this.prevGuesses.join(', ')} `)
+    }
   }
 }
 
