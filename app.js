@@ -5,6 +5,7 @@ const game = {
   guess: null,
   prevGuesses: [],
   secretNum: null,
+  hint: null,
   getGuess: function () {
     this.guess = parseInt(prompt(`Enter a guess between ${this.smallestNum + 1} and ${this.biggestNum - 1}.`));
 
@@ -30,17 +31,20 @@ const game = {
     return
   },
   render: function() {
+    
     if (this.guess === this.secretNum){ alert(`Congrats! You guessed the number in ${this.prevGuesses.length + 1} turn(s)!`)
     }else{
-      alert(`Incorrect answer. Try again.
+      alert(`Your answer was too ${this.hint}. Try again.
       Previous Attempts: ${this.prevGuesses.join(', ')} `)
     }
   },
   helper: function() {
     if (this.guess > this.secretNum){
       this.biggestNum = this.guess
+      this.hint = 'high'
     }else if (this.guess < this.secretNum) {
       this.smallestNum = this.guess
+      this.hint = 'low'
     }
   },
   setNum: function() {
@@ -49,4 +53,4 @@ const game = {
   }
 }
 
-game.play()
+game.play() 
