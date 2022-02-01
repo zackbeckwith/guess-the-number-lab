@@ -6,7 +6,7 @@ const game = {
   prevGuesses: [],
   secretNum: null,
   getGuess: function () {
-    this.guess = parseInt(prompt(`Enter a guess between ${this.smallestNum + 1} and ${this.biggestNum - 1}. The answer is: ${this.secretNum}`));
+    this.guess = parseInt(prompt(`Enter a guess between ${this.smallestNum + 1} and ${this.biggestNum - 1}.`));
 
     while (isNaN(this.guess) || this.guess >= this.biggestNum || this.guess <= this.smallestNum){
       this.guess = parseInt(prompt(`Invalid answer. Enter a guess between ${this.smallestNum + 1} and ${this.biggestNum - 1}.`))
@@ -32,7 +32,7 @@ const game = {
   render: function() {
     if (this.guess === this.secretNum){ alert(`Congrats! You guessed the number in ${this.prevGuesses.length + 1} turn(s)!`)
     }else{
-      alert(`Incorrect answer. Try again. The answer is: ${this.secretNum}.
+      alert(`Incorrect answer. Try again.
       Previous Attempts: ${this.prevGuesses.join(', ')} `)
     }
   },
